@@ -5169,15 +5169,16 @@ var elm$core$Task$perform = F2(
 			elm$core$Task$Perform(
 				A2(elm$core$Task$map, toMessage, task)));
 	});
-var author$project$Main$taskHello = function (count) {
-	var greeting = 'Hello, World!' + (' (slept for ' + (elm$core$String$fromInt(count) + ')'));
-	var _n0 = A2(elm$core$Debug$log, 'Random sleep value ', count);
-	return A2(
-		elm$core$Task$perform,
-		elm$core$Basics$always(
-			author$project$Main$Greet(greeting)),
-		elm$core$Process$sleep(count));
-};
+var author$project$Main$taskHello = F2(
+	function (count, existing) {
+		var greeting = existing + (' / ' + ('Hello, World!' + (' (slept for ' + (elm$core$String$fromInt(count) + ')'))));
+		var _n0 = A2(elm$core$Debug$log, 'Random sleep value ', count);
+		return A2(
+			elm$core$Task$perform,
+			elm$core$Basics$always(
+				author$project$Main$Greet(greeting)),
+			elm$core$Process$sleep(count));
+	});
 var elm$core$Platform$Cmd$batch = _Platform_batch;
 var elm$core$Platform$Cmd$none = elm$core$Platform$Cmd$batch(_List_Nil);
 var author$project$Main$update = F2(
@@ -5197,10 +5198,8 @@ var author$project$Main$update = F2(
 					elm$core$Platform$Cmd$none);
 			case 'DelayedHello':
 				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{contents: ''}),
-					author$project$Main$taskHello(model.count));
+					model,
+					A2(author$project$Main$taskHello, model.count, model.contents));
 			case 'Greet':
 				var s = msg.a;
 				return _Utils_Tuple2(
@@ -5216,7 +5215,7 @@ var author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{contents: '', count: val}),
-					author$project$Main$taskHello(val));
+					A2(author$project$Main$taskHello, val, ''));
 		}
 	});
 var author$project$Main$Decrement = {$: 'Decrement'};

@@ -65,8 +65,9 @@ update msg model =
             )
 
         DelayedHello ->
-            ( { model | contents = "" }
-            , taskHello model.count
+            -- ( { model | contents = "" }
+            ( model
+            , taskHello model.count model.contents
             )
 
         Greet s ->
@@ -81,7 +82,7 @@ update msg model =
 
         NewCount val ->
             ( { model | count = val, contents = "" }
-            , taskHello val
+            , taskHello val ""
             )
 
 
@@ -97,12 +98,13 @@ generateRandom =
  --}
 
 
-taskHello count =
+taskHello count existing =
     let
         _ =
             Debug.log "Random sleep value " count
 
         greeting =
+            existing ++ " / " ++
             "Hello, World!"
                 ++ " (slept for "
                 ++ String.fromInt count
