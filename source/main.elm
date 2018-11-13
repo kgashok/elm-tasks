@@ -2,7 +2,7 @@ module Main exposing (Msg(..), main, update, view)
 
 import Browser
 import Html exposing (Html, a, button, div, h1, h2, hr, img, text)
-import Html.Attributes exposing (alt, href, src)
+import Html.Attributes exposing (id, alt, href, src, target)
 import Html.Events exposing (onClick)
 import Process
 import Random
@@ -124,7 +124,9 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Counter " ]
+        [ h1 [id "title"] [ text "Counter " ]
+        , footer
+        , hr [] []
         , div [] [ text "Counter" ]
         , button [ onClick Decrement ] [ text "-" ]
         , div [] [ text (String.fromInt model.count) ]
@@ -133,4 +135,18 @@ view model =
         , button [ onClick DelayedHello ] [ text "Greet" ]
         , button [ onClick GenerateRandom ] [ text "Randomize and Greet" ]
         , h2 [] [ text model.contents ]
+        ]
+
+
+gitRepo = "https://github.com/kgashok/elm-tasks"
+
+footer : Html Msg
+footer =
+    div [ id "footer" ]
+        [ a
+            [ href (gitRepo ++ "/issues/new")
+            , target "_blank"
+            -- , rel "noopener noreferrer"
+            ]
+            [ text "Provide feedback?" ]
         ]

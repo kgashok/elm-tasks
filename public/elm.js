@@ -5223,6 +5223,7 @@ var author$project$Main$Decrement = {$: 'Decrement'};
 var author$project$Main$DelayedHello = {$: 'DelayedHello'};
 var author$project$Main$GenerateRandom = {$: 'GenerateRandom'};
 var author$project$Main$Increment = {$: 'Increment'};
+var author$project$Main$gitRepo = 'https://github.com/kgashok/elm-tasks';
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
@@ -5238,13 +5239,50 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
-var elm$html$Html$button = _VirtualDom_node('button');
+var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$div = _VirtualDom_node('div');
+var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
+var elm$json$Json$Encode$string = _Json_wrap;
+var elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$string(string));
+	});
+var elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
+var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
+var author$project$Main$footer = A2(
+	elm$html$Html$div,
+	_List_fromArray(
+		[
+			elm$html$Html$Attributes$id('footer')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$html$Html$a,
+			_List_fromArray(
+				[
+					elm$html$Html$Attributes$href(author$project$Main$gitRepo + '/issues/new'),
+					elm$html$Html$Attributes$target('_blank')
+				]),
+			_List_fromArray(
+				[
+					elm$html$Html$text('Provide feedback?')
+				]))
+		]));
+var elm$html$Html$button = _VirtualDom_node('button');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
 var elm$html$Html$h2 = _VirtualDom_node('h2');
 var elm$html$Html$hr = _VirtualDom_node('hr');
-var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
 var elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -5270,11 +5308,16 @@ var author$project$Main$view = function (model) {
 			[
 				A2(
 				elm$html$Html$h1,
-				_List_Nil,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$id('title')
+					]),
 				_List_fromArray(
 					[
 						elm$html$Html$text('Counter ')
 					])),
+				author$project$Main$footer,
+				A2(elm$html$Html$hr, _List_Nil, _List_Nil),
 				A2(
 				elm$html$Html$div,
 				_List_Nil,
