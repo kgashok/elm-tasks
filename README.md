@@ -1,7 +1,7 @@
 # From Ellie 
 
 From [Task sandbox](https://ellie-app.com/3ScxtC3XSVDa1)
-
+ - Contributed by JoelQ on Elm Slack - [https://ellie-app.com/3SrjG7WCvvGa1](https://ellie-app.com/3SrjG7WCvvGa1)
 
 Simple Elm Sample App
 =========================
